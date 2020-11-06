@@ -39,8 +39,8 @@
     <%= f.fields_for :passengers do |p| %>
       <div class="form-group">
         <div class="input-group">
-          <%= p.text_field :name, placeholder: "Passenger Name", class: "form-control" %>
-          <%= p.text_field :email, placeholder: "Passsenger Email", class: "form-control" %>
+          <%= p.text_field :name, placeholder: "Passenger Name", required: true, class: "form-control" %>
+          <%= p.text_field :email, placeholder: "Passsenger Email", required: true, class: "form-control" %>
         </div>
       </div>
     <% end %>
