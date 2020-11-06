@@ -1,0 +1,51 @@
+<h3 class="mb-6 text-center text-secondary">Passenger Information</h3>
+
+<table class="table table-bordered bg-white">
+  <thead class= "thead-light">
+    <tr>
+      <th scope="col">Flight #</th>
+      <th scope="col">Departure</th>
+      <th scope="col">Arrival</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">ETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @flight.id %></td>
+      <td><%= @flight.departure_airport.code %></td>
+      <td><%= @flight.arrival_airport.code %></td>
+      <td><%= @flight.date.strftime('%b %d, %Y') %></td>
+      <td><%= @flight.time.strftime('%l:%M %p') %></td>
+      <td>:<%= @flight.duration %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="mb-6 text-center text-secondary">Details</h3>
+
+  <div class="card">
+    <div class="card-body">
+
+    <%= form_with model: @booking, local: true do |f| %>
+      <%if @booking.errors.any? %>
+        <ul>
+          <% @booking.errors.full_messgages.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <%= f.fields_for :passengers do |p| %>
+      <div class="form-group">
+        <div class="input-group">
+          <%= p.text_field :name, placeholder: "Passenger Name", class: "form-control" %>
+          <%= p.text_field :email, placeholder: "Passsenger Email", class: "form-control" %>
+        </div>
+      </div>
+    <% end %>
+    <%= f.hidden_field :flight_id, value: params[:flight_id] %>
+    <%= f.submit "Submit", class: "btn btn-primary float-right" %>
+  </div>
+  </div>
+<% end %>

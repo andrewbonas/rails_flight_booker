@@ -1,0 +1,36 @@
+<h6 class=" mt-4 mb-4"> <%= pluralize(@flights.count, 'flight') %> matched your search </h6>
+
+<% if @flights.any? %>
+  <table class="table table-bordered bg-white">
+    <thead class= "thead-light">
+      <tr>
+        <th scope="col">Flight #</th>
+        <th scope="col">Departure</th>
+        <th scope="col">Arrival</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">ETE</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @flights.each do |flight| %>
+        <tr>
+          <td><%= flight.id %></td>
+          <td><%= flight.departure_airport.code %></td>
+          <td><%= flight.arrival_airport.code %></td>
+          <td><%= flight.date.strftime('%b %d, %Y') %></td>
+          <td><%= flight.time.strftime('%l:%M %p') %></td>
+          <td>:<%= flight.duration %></td>
+          <td>
+            <%= form_with url: new_booking_path, method: 'get', local: true do %>
+              <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
+              <%= hidden_field_tag :flight_id, flight.id %>
+              <%=submit_tag "Book flight", class: "btn btn-sm btn-block btn-outline-primary"%>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

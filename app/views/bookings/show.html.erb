@@ -1,0 +1,44 @@
+<h3 class="mb-6 text-center text-secondary">Boarding Pass</h3>
+
+<% @booking.passengers.each do |passenger| %>
+  <div class="card mt-4">
+    <div class="card-header text-center">
+      <i class="fa fa-plane"></i> BONAS AVIATION
+    </div>
+    <div class="row no-gutters">
+      <div class="col-4">
+        <div class="card-body text-center">
+          <h4 class="display-4" style="font-size: 30px;">
+            <%= @booking.flight.departure_airport.code %> -
+            <%= @booking.flight.arrival_airport.code %>
+          </h4>
+          <p class="text-secondary">Flight # BA<%= @booking.flight.id %>
+        </div>
+    </div>
+    <div class="col-2" style="border-left: 1px solid #ddd;">
+      <div class="card-body">
+       <p class="text-secondary">Passenger</p>
+       <h4><%= passenger.name.titleize %></h4>
+      </div>
+    </div>
+   <div class="col-2">
+      <div class="card-body">
+       <p class="text-secondary">Flight Date</p>
+       <h4><%=@booking.flight.date.strftime('%m/%d/%y') %></h4>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-body">
+       <p class="text-secondary">Departure Time</p>
+       <h4><%=@booking.flight.date.strftime('%l:%M %p') %></h4>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-body">
+       <p class="text-secondary">ETE</p>
+       <h4>:<%=@booking.flight.duration %></h4>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
