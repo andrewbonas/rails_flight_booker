@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>BONAS AVIATION</h2>
+      <h3>Boarding Pass</h3>
+        <div>
+          Flight # BA<%= @booking.flight.id %>/
+          <%= @booking.flight.departure_airport.code %> -
+          <%= @booking.flight.arrival_airport.code %>
+        </div>
+      <h4>Passenger</h4>
+         <%= @passenger.name.titleize %>
+      <div>
+        <h4>Flight Date</h4>
+          <%=@booking.flight.date.strftime('%m/%d/%y') %> 
+       <h4>Departure Time</h4>
+         <%=@booking.flight.date.strftime('%l:%M %p') %>
+       <h4>ETE</h4>
+         :<%=@booking.flight.duration %>
+      </div>
+  </body>
+</html>

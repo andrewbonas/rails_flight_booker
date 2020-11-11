@@ -1,0 +1,19 @@
+BONAS AVIATION
+===============
+
+Boarding Pass
+          
+Flight # BA<%= @booking.flight.id %>/<%= @booking.flight.departure_airport.code %>-<%= @booking.flight.arrival_airport.code %>
+
+Passenger
+<%= @passenger.name.titleize %>
+
+Flight Date
+<%=@booking.flight.date.strftime('%m/%d/%y') %> 
+
+Departure Time
+<%=@booking.flight.date.strftime('%l:%M %p') %>
+       
+ETE
+:<%=@booking.flight.duration %>
+   

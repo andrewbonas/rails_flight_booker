@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   def index
-
   end
 
   def new
@@ -13,7 +12,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
-      redirect_to @booking, notice: "Thanks for booking"
+      @booking.passengers.each do |p|
+        PassengerMailer.with(booking: @booking, passenger: p).confirmation_email.deliver_now!
+      end
+      redirect_to @booking, notice: "Thanks for booking, email confirmation has been sent"
     else
       render :new
     end
